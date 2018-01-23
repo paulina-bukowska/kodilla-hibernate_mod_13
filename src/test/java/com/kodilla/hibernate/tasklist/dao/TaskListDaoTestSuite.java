@@ -18,15 +18,18 @@ public class TaskListDaoTestSuite {
     @Test
     public void testFindByListName() {
         // Given
-        TaskList taskList = new TaskList("Tasks in progress", "Working on my computer");
-        taskListDao.save(taskList);
-        String listName = taskList.getListName();
+        TaskList task1 = new TaskList("Tasks in progress", "Working on my computer");
+        taskListDao.save(task1);
+        String listName = task1.getListName();
 
         // When
         List<TaskList> actualTasks = taskListDao.findByListName(listName);
 
         //Then
         Assert.assertEquals(1, actualTasks.size());
+        //Assert.assertTrue(actualTasks.contains(task1));
+        Assert.assertEquals("Tasks in progress", task1.getListName());
+        Assert.assertEquals("Working on my computer", task1.getDescription());
 
         //CleanUp
         int id = actualTasks.get(0).getId();
