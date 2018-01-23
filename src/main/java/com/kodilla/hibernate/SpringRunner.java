@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KodillaHibernateApplication {
+public class SpringRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KodillaHibernateApplication.class, args);
+		SpringApplication.run(SpringRunner.class, args);
 	}
 }
