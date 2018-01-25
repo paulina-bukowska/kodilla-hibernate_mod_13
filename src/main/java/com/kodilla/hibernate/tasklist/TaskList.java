@@ -1,6 +1,8 @@
 package com.kodilla.hibernate.tasklist;
 
+import com.kodilla.hibernate.task.Task;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,6 +11,7 @@ public class TaskList {
     private Integer id;
     private String listName;
     private String description;
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
     }
@@ -35,6 +38,16 @@ public class TaskList {
         return description;
     }
 
+    @OneToMany(
+            targetEntity = Task.class,
+            mappedBy = "taskList",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -45,5 +58,29 @@ public class TaskList {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaskList)) return false;
+
+        TaskList taskList = (TaskList) o;
+
+        if (!id.equals(taskList.id)) return false;
+        if (!listName.equals(taskList.listName)) return false;
+        return description.equals(taskList.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + listName.hashCode();
+        result = 31 * result + description.hashCode();
+        return result;
     }
 }

@@ -1,12 +1,16 @@
 package com.kodilla.hibernate.task.dao;
 
 import com.kodilla.hibernate.task.Task;
+import com.kodilla.hibernate.task.TaskFinancialDetails;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -23,14 +27,16 @@ public class TaskDaoTestSuite {
 
         //When
         taskDao.save(task);
-
-        //Then
         int id = task.getId();
         Task readTask = taskDao.findOne(id);
-        Assert.assertEquals(id, readTask.getId());
 
-        //CleanUp
-        taskDao.delete(id);
+        //Then
+        try {
+            Assert.assertEquals(id, readTask.getId());
+        } finally {
+            //CleanUp
+            taskDao.delete(id);
+        }
     }
 
     @Test
@@ -44,10 +50,31 @@ public class TaskDaoTestSuite {
         List<Task> readTasks = taskDao.findByDuration(duration);
 
         //Then
-        Assert.assertEquals(1, readTasks.size());
+        try {
+            Assert.assertEquals(1, readTasks.size());
+        } finally {
+            //CleanUp
+            int id = readTasks.get(0).getId();
+            taskDao.delete(id);
+        }
+    }
 
-        //CleanUp
-        int id = readTasks.get(0).getId();
-        taskDao.delete(id);
+    @Test
+    public void testTaskDaoSaveWithFinancialDetails() {
+        //Given
+        Task task = new Task(DESCRIPTION, 30);
+        task.setTaskFinancialDetails(new TaskFinancialDetails(new BigDecimal(120), false));
+
+        //When
+        taskDao.save(task);
+        int id = task.getId();
+
+        //Then
+        try {
+            Assert.assertNotEquals(0, id);
+        } finally {
+            //CleanUp
+            taskDao.delete(id);
+        }
     }
 }
