@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
@@ -34,7 +33,6 @@ public class InvoiceDaoTestSuite {
         item3.setProduct(car);
 
         Invoice invoice = new Invoice("IV/132/2017");
-        int idInvoice = invoice.getId();
 
         invoice.getItems().add(item1);
         invoice.getItems().add(item2);
@@ -46,6 +44,7 @@ public class InvoiceDaoTestSuite {
 
         //When
         invoiceDao.save(invoice);
+        int idInvoice = invoice.getId();
 
         Invoice readInvoice = invoiceDao.findOne(idInvoice);
         long howManyRecordsInInvoice = invoiceDao.count();
@@ -53,7 +52,7 @@ public class InvoiceDaoTestSuite {
         //Then
             try {
                 Assert.assertEquals(idInvoice, readInvoice.getId());
-                Assert.assertEquals(3, howManyRecordsInInvoice);
+                Assert.assertEquals(1, howManyRecordsInInvoice);
                 Assert.assertFalse(invoiceDao.exists(0));
             } finally {
                 //CleanUp
