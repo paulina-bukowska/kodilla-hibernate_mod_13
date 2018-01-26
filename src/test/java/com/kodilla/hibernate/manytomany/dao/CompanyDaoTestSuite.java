@@ -146,7 +146,7 @@ public class CompanyDaoTestSuite {
             Assert.assertEquals(1, listOfCompanies.size());
             Assert.assertEquals(1, smith.size());
             Assert.assertEquals(2, murphy.size());
-            //Assert.assertEquals(tictockInternational.getName(), companyDao.findOne(tictockInternationalId));
+            Assert.assertEquals(tictockInternational, companyDao.findOne(tictockInternationalId));
         } finally {
             //CleanUp
             try {

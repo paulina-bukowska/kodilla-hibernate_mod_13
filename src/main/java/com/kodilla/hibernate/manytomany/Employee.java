@@ -70,4 +70,27 @@ public class Employee {
     public void setCompanies(List<Company> companies) {
         this.companies = companies;
     }
+
+    @Override
+    public String toString() {
+        return firstname + " " + lastname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+
+        if (!firstname.equals(employee.firstname)) return false;
+        return lastname.equals(employee.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstname.hashCode();
+        result = 31 * result + lastname.hashCode();
+        return result;
+    }
 }
