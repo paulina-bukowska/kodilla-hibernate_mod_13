@@ -17,6 +17,12 @@ public class InvoiceDaoTestSuite {
     @Autowired
     private InvoiceDao invoiceDao;
 
+    @Autowired
+    private ItemDao itemDao;
+
+    @Autowired
+    private ProductDao productDao;
+
     @Test
     public void testInvoiceDaoSave() {
         //Given
@@ -48,14 +54,22 @@ public class InvoiceDaoTestSuite {
 
         Invoice readInvoice = invoiceDao.findOne(idInvoice);
         long howManyRecordsInInvoice = invoiceDao.count();
+        long howManyRecordsInItem = itemDao.count();
+        long howManyRecordsInProduct = productDao.count();
 
         //Then
             try {
                 Assert.assertEquals(idInvoice, readInvoice.getId());
                 Assert.assertEquals(1, howManyRecordsInInvoice);
+                Assert.assertEquals(3, howManyRecordsInItem);
+                Assert.assertEquals(3, howManyRecordsInProduct);
                 Assert.assertFalse(invoiceDao.exists(0));
+                Assert.assertFalse(itemDao.exists(0));
+                Assert.assertFalse(productDao.exists(0));
                 Assert.assertEquals("Teddy bear", bear.getName());
                 Assert.assertEquals(bear, item2.getProduct());
+                Assert.assertTrue(invoice.getItems().contains(item3));
+                //Assert.assertEquals([game, bear, car], productDao.findAll());
             } finally {
                 //CleanUp
                 invoiceDao.delete(idInvoice);

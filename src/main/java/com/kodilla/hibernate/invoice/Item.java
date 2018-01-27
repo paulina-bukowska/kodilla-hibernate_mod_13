@@ -80,4 +80,29 @@ public class Item {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
+    @Override
+    public String toString() {
+        return product + ", " + price + ", " + quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+
+        Item item = (Item) o;
+
+        if (product != null ? !product.equals(item.product) : item.product != null) return false;
+        if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        return quantity != null ? quantity.equals(item.quantity) : item.quantity == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = product != null ? product.hashCode() : 0;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
+        return result;
+    }
 }
