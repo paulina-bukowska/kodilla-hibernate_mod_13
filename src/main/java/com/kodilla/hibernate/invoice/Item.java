@@ -23,12 +23,17 @@ public class Item {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID", nullable = false, unique = true)
+    @Column(
+            name = "ID",
+            nullable = false,
+            unique = true)
     public int getId() {
         return id;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;

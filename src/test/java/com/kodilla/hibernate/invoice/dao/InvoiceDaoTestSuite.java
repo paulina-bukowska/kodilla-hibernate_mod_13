@@ -54,6 +54,8 @@ public class InvoiceDaoTestSuite {
                 Assert.assertEquals(idInvoice, readInvoice.getId());
                 Assert.assertEquals(1, howManyRecordsInInvoice);
                 Assert.assertFalse(invoiceDao.exists(0));
+                Assert.assertEquals("Teddy bear", bear.getName());
+                Assert.assertEquals(bear, item2.getProduct());
             } finally {
                 //CleanUp
                 invoiceDao.delete(idInvoice);
