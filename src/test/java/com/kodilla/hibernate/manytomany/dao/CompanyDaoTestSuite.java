@@ -149,15 +149,21 @@ public class CompanyDaoTestSuite {
             Assert.assertEquals(tictockInternational, companyDao.findOne(tictockInternationalId));
         } finally {
             //CleanUp
-            try {
-                companyDao.delete(softwareMachineId);
+            companyDao.delete(softwareMachineId);
+            if(companyDao.exists(dataMaestersId)) {
                 companyDao.delete(dataMaestersId);
+            }
+            if (companyDao.exists(greyMatterId)) {
                 companyDao.delete(greyMatterId);
+            }
+            if (companyDao.exists(afterglowSystemsId)) {
                 companyDao.delete(afterglowSystemsId);
+            }
+            if(companyDao.exists(tictockInternationalId)) {
                 companyDao.delete(tictockInternationalId);
+            }
+            if(companyDao.exists(goldUnwindId)) {
                 companyDao.delete(goldUnwindId);
-            } catch (Exception e) {
-                //do nothing
             }
         }
     }
