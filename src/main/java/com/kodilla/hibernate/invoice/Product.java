@@ -1,14 +1,16 @@
 package com.kodilla.hibernate.invoice;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.beans.FatalBeanException;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
     private int id;
     private String name;
+    private List<Item> itemsWithProduct = new ArrayList<>();
 
     public Product() {
     }
@@ -28,12 +30,26 @@ public class Product {
         return name;
     }
 
+    @OneToMany(
+            targetEntity = Item.class,
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    public List<Item> getItemsWithProduct() {
+        return itemsWithProduct;
+    }
+
     private void setId(int id) {
         this.id = id;
     }
 
     private void setName(String name) {
         this.name = name;
+    }
+
+    public void setItemsWithProduct(List<Item> itemsWithProduct) {
+        this.itemsWithProduct = itemsWithProduct;
     }
 
     @Override
