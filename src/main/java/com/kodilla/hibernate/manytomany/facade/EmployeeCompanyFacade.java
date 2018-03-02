@@ -25,20 +25,20 @@ public class EmployeeCompanyFacade {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeCompanyFacade.class);
 
-    public List<Employee> searchEmployeeByPartLastName() {
+    public List<Employee> searchEmployeeByPartLastName(String partLastName) {
         LOGGER.info("Searching employees...");
         List<Employee> matchesEmployees = new ArrayList<>();
-        matchesEmployees = employeeDao.retrieveEmployeesByPartLastName();
+        matchesEmployees = employeeDao.retrieveEmployeesByPartLastName(partLastName);
         if(matchesEmployees.size() == 0) {
             LOGGER.info("Cannot find employees matching your query");
         }
         return matchesEmployees;
     }
 
-    public List<Company> searchCompanyByPartName() {
+    public List<Company> searchCompanyByPartName(String partName) {
         LOGGER.info("Searching companies...");
         List<Company> matchesCompanies = new ArrayList<>();
-        matchesCompanies = companyDao.retrieveCompaniesByPartName();
+        matchesCompanies = companyDao.retrieveCompaniesByPartName(partName);
         if(matchesCompanies.size() == 0) {
             LOGGER.info("Cannot find companies matching your query");
         }

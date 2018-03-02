@@ -13,7 +13,7 @@ import java.util.List;
         ),
         @NamedNativeQuery(
                 name ="Company.retrieveCompaniesByPartName",
-                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE '%ter%'",
+                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE '%%'",
                 resultClass = Company.class
         )
 })
