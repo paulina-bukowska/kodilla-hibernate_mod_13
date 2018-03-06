@@ -8,12 +8,12 @@ import java.util.List;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name="Company.retrieveCompaniesByFirst3Letters",
-                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME REGEXP \"^sof\"",
+                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME REGEXP '^sof'",
                 resultClass = Company.class
         ),
         @NamedNativeQuery(
                 name ="Company.retrieveCompaniesByPartName",
-                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE :'%PARTNAME%'",
+                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE '%ter%'",
                 resultClass = Company.class
         )
 })
