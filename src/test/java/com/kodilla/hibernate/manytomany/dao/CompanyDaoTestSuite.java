@@ -135,7 +135,7 @@ public class CompanyDaoTestSuite {
 
         //When
         List<Company> listOfCompanies = companyDao.retrieveCompaniesByFirst3Letters();
-        List<Employee> smith = employeeDao.retrieveEmployeesByLastName("Smith");
+        List<Employee> smith = employeeDao.retrieveEmployeesByLastName("%mit%");
         List<Employee> murphy = employeeDao.retrieveEmployeesByLastName("Murphy");
 
         //Then
@@ -147,6 +147,7 @@ public class CompanyDaoTestSuite {
             Assert.assertEquals(1, listOfCompanies.size());
             Assert.assertEquals(1, smith.size());
             Assert.assertEquals(2, murphy.size());
+            Assert.assertEquals("Smith", smith.get(0).getLastname());
             Assert.assertEquals(tictockInternational, companyDao.findOne(tictockInternationalId));
         } finally {
             //CleanUp
